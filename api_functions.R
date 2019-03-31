@@ -22,3 +22,19 @@ function(){
 function(a, b){
     as.numeric(a) + as.numeric(b)
 }
+
+#* @get /pg
+function(){
+    require("RPostgreSQL")
+
+pw <- {
+  "pg"
+}
+# https://github.com/qoomon/docker-host
+drv <- dbDriver("PostgreSQL")
+con <- dbConnect(drv, dbname = "uu",
+                 host = "localhost", port = 5432,
+                 user = "postgres", password = pw)
+dbGetQuery(con, 'select * from iris')
+
+}
