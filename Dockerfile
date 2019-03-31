@@ -9,8 +9,7 @@ ADD ./nginx.conf /etc/nginx/nginx.conf
 
 # install R packages
 RUN install2.r \
-   plumber 
-# RPostgreSQL future
+   plumber RPostgreSQL #future
 
 EXPOSE 80
 
@@ -21,4 +20,6 @@ CMD service nginx start && R -e "source('start_api.R')"
 
 
 # sudo docker build -t ppapi .
-#  sudo docker run --rm -p 80:80  ppapi
+#  sudo docker run --rm -p 80:80 -- ppapi
+# sudo docker run --rm -p 80:80 --net=host ppapi
+# https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
